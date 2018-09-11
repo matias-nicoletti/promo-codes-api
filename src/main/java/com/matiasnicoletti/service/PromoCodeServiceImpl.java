@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.matiasnicoletti.model.PromoCode;
 import com.matiasnicoletti.repository.PromoCodeRepository;
+import com.matiasnicoletti.utils.GeoUtils;
 
 @Component
 public class PromoCodeServiceImpl implements PromoCodeService {
@@ -60,8 +61,14 @@ public class PromoCodeServiceImpl implements PromoCodeService {
 						|| (checkWithinRadius(promoCode, destinationLatitude, destinationLongitude)));
 	}
 
-	private boolean checkWithinRadius(PromoCode promoCode, String latitude, String longitude) {
-		return true;
+	private Boolean checkWithinRadius(PromoCode promoCode, String latitude, String longitude) {
+		try {
+			Double distanceInMeters = GeoUtils.distanceInMeters(promoCode.getEventLatitude(),
+					promoCode.getEventLongitude(), latitude, longitude);
+			return radiusInMeters >= distanceInMeters;
+		} catch (Exception e) {
+			return Boolean.FALSE;
+		}
 	}
 
 	private boolean checkExpirationDate(PromoCode promoCode) {
