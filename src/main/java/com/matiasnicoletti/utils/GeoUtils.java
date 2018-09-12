@@ -4,7 +4,7 @@ package com.matiasnicoletti.utils;
 /*::                                                                         :*/
 /*::  This routine calculates the distance between two points (given the     :*/
 /*::  latitude/longitude of those points). It is being used to calculate     :*/
-/*::  the distance between two locations using GeoDataSource (TM) prodducts  :*/
+/*::  the distance between two locations using GeoDataSource (TM) products  :*/
 /*::                                                                         :*/
 /*::  Definitions:                                                           :*/
 /*::    South latitudes are negative, east longitudes are positive           :*/

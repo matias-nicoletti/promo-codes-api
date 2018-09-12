@@ -9,8 +9,11 @@ import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+import com.matiasnicoletti.config.CachingConfig;
 import com.matiasnicoletti.model.PromoCode;
 import com.matiasnicoletti.repository.PromoCodeRepository;
 import com.matiasnicoletti.utils.GeoUtils;
@@ -25,6 +28,7 @@ public class PromoCodeServiceImpl implements PromoCodeService {
 	private Long radiusInMeters;
 
 	@Override
+	@CacheEvict(value = CachingConfig.PROMO_CODES_CACHE, key = "#id")
 	public Optional<PromoCode> updatePromoCode(String id, PromoCode newPromoCode) {
 		return promoCodeRepository.findById(id).map(oldPromoCode -> {
 			oldPromoCode.setIsActive(newPromoCode.getIsActive());
@@ -42,6 +46,7 @@ public class PromoCodeServiceImpl implements PromoCodeService {
 	}
 
 	@Override
+	@Cacheable(CachingConfig.PROMO_CODES_CACHE)
 	public Optional<PromoCode> getPromoCode(String id) {
 		return promoCodeRepository.findById(id);
 	}

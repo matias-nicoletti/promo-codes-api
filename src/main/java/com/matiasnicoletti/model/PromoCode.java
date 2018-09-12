@@ -25,6 +25,21 @@ public class PromoCode {
 	private String eventName;
 	private LocalDate expireDate;
 
+	public PromoCode() {
+	}
+
+	public PromoCode(String id, @NotNull BigDecimal amount, @NotNull Boolean isActive, @NotNull String eventLatitude,
+			@NotNull String eventLongitude, String eventName, LocalDate expireDate) {
+		super();
+		this.id = id;
+		this.amount = amount;
+		this.isActive = isActive;
+		this.eventLatitude = eventLatitude;
+		this.eventLongitude = eventLongitude;
+		this.eventName = eventName;
+		this.expireDate = expireDate;
+	}
+
 	public String getId() {
 		return id;
 	}

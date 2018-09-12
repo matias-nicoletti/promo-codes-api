@@ -35,7 +35,7 @@ public class PromoCodeController {
 		return promoCodeService.getPromoCode(id).orElseThrow(PromoCodeNotFoundException::new);
 	}
 
-	@PostMapping("/promo-codes/")
+	@PostMapping("/promo-codes")
 	public PromoCode createPost(@Valid @RequestBody PromoCode promoCode) {
 		return promoCodeService.savePromoCode(promoCode);
 	}
